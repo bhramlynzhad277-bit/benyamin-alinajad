@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بنیامین علینژاد | پرو ساید</title>
+    <style>
+        :root {
+            --neon-gold: #ffcc00;
+            --premium-gold: #d4af37;
+            --dark-core: #050403;
+            --glass-bg: rgba(18, 14, 10, 0.65);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1c140c 0%, var(--dark-core) 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            padding: 25px;
+            position: relative;
+        }
+
+        /* سیستم باران نت‌های موسیقی */
+        .music-rain-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .note {
+            position: absolute;
+            color: var(--premium-gold);
+            font-size: 24px;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 8px var(--neon-gold));
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* هدر استودیویی لوکس */
+        header {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            background: rgba(15, 12, 10, 0.7);
+            padding: 20px 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            z-index: 10;
+        }
+
+        .brand-name h1 {
+            font-size: 26px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, var(--premium-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+            letter-spacing: 2px;
+        }
+
+        /* شاهکار جدید: پنل ساعت فوق خفن ایران */
+        .iran-clock-premium {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(20, 15, 10, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 8px 24px;
+            border-radius: 16px;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15), inset 0 0 15px rgba(212, 175, 55, 0.1);
+            position: relative;
+        }
+
+        .clock-top-label {
+            font-size: 9px;
+            color: var(--premium-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+
+        .digital-display {
+            display: flex;
+            align-items: center;
+            font-family: monospace;
+            font-size: 26px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 15px var(--neon-gold), 0 0 30px rgba(255, 204, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        /* افکت پالس جداکننده‌ها */
+        .time-colon {
+            animation: pulse-colon 1s infinite;
+            padding: 0 2px;
+            color: var(--premium-gold);
+        }
+
+        @keyframes pulse-colon {
+            0%, 100% { opacity: 0.2; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* کارت اینستاگرام خفن و گنگ وسط صفحه */
+        .showcase-wrapper {
+            z-index: 5;
+            perspective: 1000px;
+        }
+
+        .profile-card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            width: 360px;
+            padding: 40px 30px;
+            border-radius: 32px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-card:hover {
+            box-shadow: 0 40px 80px rgba(212, 175, 55, 0.15);
+        }
+
+        /* دایره آواتار نئونی */
+        .avatar-ring {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+            padding: 4px;
+            box-shadow: 0 0 30px rgba(220, 39, 67, 0.4);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .avatar-ring::after {
+            content: '';
+            position: absolute;
+            top: -6px; left: -6px; right: -6px; bottom: -6px;
+            border-radius: 50%;
+            border: 2px dashed var(--premium-gold);
+            animation: spin 15s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #15100c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .user-id {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .user-bio {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* دکمه اینستاگرام لوکس هولوگرافیک */
+        .insta-action-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 10px 25px rgba(220, 39, 67, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .insta-action-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(220, 39, 67, 0.6);
+            letter-spacing: 0.5px;
+        }
+
+        /* فوتر */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding-top: 20px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.25);
+            border-top: 1px solid rgba(212, 175, 55, 0.05);
+            max-width: 1100px;
+            z-index: 10;
+        }
+
+        footer span {
+            color: var(--premium-gold);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- کانتینر باران موزیک -->
+    <div class="music-rain-container" id="rain-zone"></div>
+
+    <!-- هدر با تایمر زنده و فوق‌مدرن تهران -->
+    <header>
+        <div class="brand-name">
+            <h1>BENYAMIN ALINAJAD</h1>
+        </div>
+        
+        <!-- ساعت ارتقا یافته کاملاً گنگ -->
+        <div class="iran-clock-premium">
+            <span class="clock-top-label">IRAN CORE TIME</span>
+            <div class="digital-display">
+                <span id="h-slot">00</span>
+                <span class="time-colon">:</span>
+                <span id="m-slot">00</span>
+                <span class="time-colon">:</span>
+                <span id="s-slot">00</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- کارت وی‌آی‌پِی نمایش پیج اینستاگرام بنیامین -->
+    <div class="showcase-wrapper">
+        <div class="profile-card" id="tilt-card">
+            
+            <!-- دایره آواتار -->
+            <div class="avatar-ring">
+                <div class="avatar-inner">
+                    👑
+                </div>
+            </div>
+
+            <!-- اطلاعات پیج -->
+            <div class="user-id">benyamin_alinajad</div>
+            <div class="user-bio">
+                توسعه‌دهنده وب و پروژه‌های خلاقانه دیجیتال<br>
+                خوش آمدید به ایستگاه رسمی موزیک و رسانه
+            </div>
+
+            <!-- دکمه ورود مستقیم -->
+            <a href="https://www.instagram.com/benyamin_alinajad?igsh=MWtzOGRscDl4aTE5dQ==" target="_blank" class="insta-action-btn">
+                ورود به پیج رسمی اینستاگرام
+            </a>
+            
+        </div>
+    </div>
+
+    <!-- فوتر هوشمند سال ۲۰۲۶ -->
+    <footer>
+        توسعه پلتفرم اختصاصی برای <span>بنیامین</span> عزیز © 2026
+    </footer>
+
+    <script>
+        // ۱. الگوریتم باران شکلک‌های موسیقی
+        const rainZone = document.getElementById('rain-zone');
+        const musicalNotes = ['🎵', '🎶', '🎧', '✨', '🎵', '🎹'];
+
+        function createNote() {
+            const noteElement = document.createElement('div');
+            noteElement.classList.add('note');
+            noteElement.innerText = musicalNotes[Math.floor(Math.random() * musicalNotes.length)];
+            noteElement.style.left = Math.random() * 100 + 'vw';
+            
+            const randomSize = Math.random() * 20 + 16; 
+            noteElement.style.fontSize = randomSize + 'px';
+            
+            const duration = Math.random() * 4 + 4; 
+            noteElement.style.animationDuration = duration + 's';
+            noteElement.style.opacity = Math.random() * 0.6 + 0.3;
+
+            rainZone.appendChild(noteElement);
+
+            setTimeout(() => {
+                noteElement.remove();
+            }, duration * 1000);
+        }
+        setInterval(createNote, 250);
+
+        // ۲. افکت تعاملی سه‌بعدی (3D Tilt Effect) روی کارت و ساعت هنگام حرکت ماوس
+        const card = document.getElementById('tilt-card');
+        
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.clientX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.clientY) / 25;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        document.addEventListener('mouseleave', () => {
+            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+
+        // ۳. تفکیک و پردازش فوق پیشرفته اجزای ساعت تهران
+        function updateTehranClock() {
+            const options = {
+                timeZone: 'Asia/Tehran',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            
+            const formatter = new Intl.DateTimeFormat('en-US', options);
+            const parts = formatter.formatToParts(new Date());
+            
+            // استخراج ساعت، دقیقه و ثانیه به صورت مجزا
+            let hour = "00", minute = "00", second = "00";
+            for (let part of parts) {
+                if (part.type === 'hour') hour = part.value;
+                if (part.type === 'minute') minute = part.value;
+                if (part.type === 'second') second = part.value;
+            }
+
+            // تزریق مستقیم به اسلات‌های جداگانه نئونی
+            document.getElementById('h-slot').innerText = hour;
+            document.getElementById('m-slot').innerText = minute;
+            document.getElementById('s-slot').innerText = second;
+        }
+        
+        setInterval(updateTehranClock, 1000);
+        updateTehranClock(); // اجرای اولیه
+    </script>
+</body>
+</html>
